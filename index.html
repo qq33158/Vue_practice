@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+        /*CSS寫在這裡*/
+    </style>
+
+</head>
+
+<body>
+    <div>
+        Number:<input type="number" id="numberInput" min="-60" max="60" step="2" onchange="numberChange()" />
+        <input id="numberText" />
+    </div>
+    <div>
+        Range:<input type="range" id="rangeInput" min="-40" max="40" step="2" onchange="rangeChange()" />
+        <input id="rangeText" />
+    </div>
+    <div id="demo">
+        <h1>{{ msg }}</h1>
+        <input v-model="msg">
+    </div>
+
+    <div id="demo1">
+        <h1>%{ msg1 }%</h1>
+        <input v-model="msg1">
+    </div>
+
+    <div id="demo2">
+        
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        // JS寫在這裡
+        // Vue
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    msg: 'Hello Vue.js'
+                }
+            }
+        }).mount('#demo'); // 寫法一
+        vm.$data.msg = 'Hi Python!';
+        //vm.mount('#demo');   // 寫法二
+
+        const vm1 = Vue.createApp({
+            delimiters: ['%{','}%'],
+            data() {
+                return {
+                    msg1: 'Hello!'
+                }
+            }
+        })
+        vm1.mount('#demo1');
+
+        const vm2 = Vue.createApp({
+            template : `<h1>{{ greeting}} You are great!</h1><input v-model="greeting"> `,
+            data(){
+                return{
+                    greeting:'Hello, use template!'
+                }
+            }
+        }).mount('#demo2');
+
+        // JS
+        function numberChange() {
+            var n = document.getElementById('numberInput').value;
+            document.getElementById('numberText').value = n;
+        }
+        function rangeChange() {
+            var n = document.getElementById('rangeInput').value;
+            document.getElementById('rangeText').value = n;
+        }
+    </script>
+</body>
+
+</html>
